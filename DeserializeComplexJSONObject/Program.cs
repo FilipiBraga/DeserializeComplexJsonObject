@@ -5,6 +5,9 @@ namespace DeserializeComplexJSONObject
 {
     public class Program
     {
+        private static readonly MicrosoftDeserializer _microsoftDeserializer = new();
+        private static readonly NewtonsoftDeserializer _newtonsoftDeserializer = new();
+
         public static void Main(string[] args)
         {
             Console.WriteLine("-------------------- Deserializing complex JSON object");
@@ -16,36 +19,18 @@ namespace DeserializeComplexJSONObject
 
             Console.WriteLine();
 
+            Console.WriteLine("---------- Deserialize using Generic System.Text.Json");
+            var companyGenericSystemText = _microsoftDeserializer.DeserializeUsingGenericSystemTextJson(json);
+
             Console.WriteLine("---------- Deserialize using System.Text.Json");
-            var companyUsingSystemTextJson = DeserializeUsingGenericSystemTextJson(json);
+            var companySystemText = _microsoftDeserializer.DeserializeUsingGenericSystemTextJson(json);
 
             Console.WriteLine();
 
             Console.WriteLine("---------- Deserialize using Newtonsoft.Json");
-            var companyUsingNewtonSoftJson = DeserializeUsingNewtonSoftJson(json);
+            var companyNewtonsoftJson = _newtonsoftDeserializer.DeserializeUsingGenericNewtonSoftJson(json);
 
             Console.WriteLine("End of execution");
-        }
-
-        private static Company? DeserializeUsingNewtonSoftJson(string json)
-        {
-            var company = Newtonsoft.Json.JsonConvert.DeserializeObject<Company>(json);
-
-            return company;
-        }
-
-        private static Company? DeserializeUsingGenericSystemTextJson(string json)
-        {
-            var company = JsonSerializer.Deserialize<Company>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-
-            return company;
-        }
-
-        private static Company? DeserializeUsingSystemTextJson(string json)
-        {
-            var company = (Company?)JsonSerializer.Deserialize(json, typeof(Company), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-
-            return company;
         }
 
         private static string ReadJsonFile()
