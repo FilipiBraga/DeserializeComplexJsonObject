@@ -1,6 +1,4 @@
-﻿
-
-namespace DeserializeComplexJSONObject.POCO
+﻿namespace DeserializeComplexJSONObject.POCO
 {
     public class Employee
     {

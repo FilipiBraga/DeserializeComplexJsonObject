@@ -1,13 +1,9 @@
-﻿using DeserializeComplexJSONObject.POCO;
-using System.Text.Json;
-
-namespace DeserializeComplexJSONObject
+﻿namespace DeserializeComplexJSONObject
 {
     public class Program
     {
         private static readonly MicrosoftDeserializer _microsoftDeserializer = new();
         private static readonly NewtonsoftDeserializer _newtonsoftDeserializer = new();
-
         public static int OutputResult = 0;
 
         public static void Main(string[] args)
