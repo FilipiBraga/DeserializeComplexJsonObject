@@ -8,6 +8,8 @@ namespace DeserializeComplexJSONObject
         private static readonly MicrosoftDeserializer _microsoftDeserializer = new();
         private static readonly NewtonsoftDeserializer _newtonsoftDeserializer = new();
 
+        public static int OutputResult = 0;
+
         public static void Main(string[] args)
         {
             Console.WriteLine("-------------------- Deserializing complex JSON object");
@@ -28,14 +30,16 @@ namespace DeserializeComplexJSONObject
             Console.WriteLine();
 
             Console.WriteLine("---------- Deserialize using Newtonsoft.Json");
-            var companyNewtonsoftJson = _newtonsoftDeserializer.DeserializeUsingGenericNewtonSoftJson(json);
+            var companyNewtonsoftJson = _newtonsoftDeserializer.DeserializeUsingGenericNewtonsoftJson(json);
 
             Console.WriteLine("End of execution");
+
+            OutputResult = 1;
         }
 
         private static string ReadJsonFile()
         {
-            using StreamReader reader = new(@$"{AppContext.BaseDirectory}\ComplexObject.json");
+            using StreamReader reader = new(@$"{AppContext.BaseDirectory}\JsonFiles\ComplexObject.json");
             return reader.ReadToEnd();
         }
     }
