@@ -37,7 +37,7 @@ namespace DeserializeComplexJSONObject
             OutputResult = 1;
         }
 
-        private static string ReadJsonFile()
+        public static string ReadJsonFile()
         {
             using StreamReader reader = new(@$"{AppContext.BaseDirectory}\JsonFiles\ComplexObject.json");
             return reader.ReadToEnd();
